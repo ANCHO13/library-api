@@ -11,12 +11,12 @@ import java.util.List;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    // Method-name query: exact (case-insensitive) match on both names.
+    // Method-name query: search by full name
     List<Author> findByFirstNameIgnoreCaseAndLastNameIgnoreCase(String firstName, String lastName);
 
     boolean existsByEmailIgnoreCase(String email);
 
-    // Custom query: how many books each author has, most productive first.
+    // @Query: book count per author
     @Query("""
             select a.id as authorId,
                    concat(a.firstName, ' ', a.lastName) as authorName,

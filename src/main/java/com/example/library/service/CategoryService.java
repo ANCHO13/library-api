@@ -65,7 +65,7 @@ public class CategoryService {
     @Transactional
     public void delete(Long id) {
         Category category = getCategory(id);
-        // Book owns the join table, so unlink the books first; the books themselves stay.
+        // Unlink books first (Book owns the join table)
         for (Book book : category.getBooks()) {
             book.getCategories().remove(category);
         }

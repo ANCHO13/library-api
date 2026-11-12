@@ -12,9 +12,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Turns exceptions into consistent JSON error responses.
- */
+// Maps exceptions to JSON error responses
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

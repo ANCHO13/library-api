@@ -14,9 +14,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Stores uploaded files on the local disk.
- */
+// Stores uploaded files on local disk
 @Service
 public class FileStorageService {
 
@@ -35,10 +33,7 @@ public class FileStorageService {
         }
     }
 
-    /**
-     * Saves the file under a generated name and returns its relative path,
-     * e.g. "uploads/7c1e...-.png". That path is what gets stored in the database.
-     */
+    // Returns the relative path saved in the DB
     public String store(MultipartFile file) {
         if (file == null || file.isEmpty()) {
             throw new FileStorageException("Uploaded file is empty");
@@ -63,9 +58,7 @@ public class FileStorageService {
         return uploadDirName + "/" + storedName;
     }
 
-    /**
-     * Deletes a previously stored file. Missing files are ignored.
-     */
+    // Missing files are ignored
     public void delete(String relativePath) {
         if (relativePath == null || relativePath.isBlank()) {
             return;
@@ -74,7 +67,7 @@ public class FileStorageService {
         try {
             Files.deleteIfExists(uploadRoot.resolve(fileName).normalize());
         } catch (IOException ignored) {
-            // A leftover file on disk is not worth failing the request for.
+            // Not worth failing the request
         }
     }
 

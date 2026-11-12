@@ -1,8 +1,6 @@
 package com.example.library.dto;
 
-/**
- * Projection for the "books per author" statistics query.
- */
+// Projection for books-per-author stats
 public interface AuthorBookCount {
 
     Long getAuthorId();

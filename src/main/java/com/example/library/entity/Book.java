@@ -36,7 +36,7 @@ public class Book {
     @Column(name = "publication_year", nullable = false)
     private Integer publicationYear;
 
-    // Relative path of the uploaded cover file, e.g. "uploads/3f2a....jpg"
+    // e.g. uploads/<uuid>.png
     @Column(name = "cover_image_path")
     private String coverImagePath;
 
@@ -45,7 +45,7 @@ public class Book {
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
-    // A book can be in many categories, and a category holds many books.
+    // Owning side of the many-to-many
     @ManyToMany
     @JoinTable(
             name = "book_categories",

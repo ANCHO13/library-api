@@ -25,7 +25,7 @@ public class Category {
     @Column(length = 255)
     private String description;
 
-    // Inverse side of the Book <-> Category many-to-many relationship.
+    // Inverse side of Book.categories
     @ManyToMany(mappedBy = "categories")
     private Set<Book> books = new HashSet<>();
 

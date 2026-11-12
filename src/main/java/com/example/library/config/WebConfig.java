@@ -7,9 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.file.Paths;
 
-/**
- * Serves uploaded files back over HTTP at /uploads/{fileName}.
- */
+// Serves uploaded files at /uploads/**
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

@@ -45,9 +45,7 @@ public class BookService {
         this.fileStorageService = fileStorageService;
     }
 
-    /**
-     * Paginated, sorted list with an optional title filter and minimum year.
-     */
+    // Paged list with title and year filters
     @Transactional(readOnly = true)
     public PageResponse<BookResponse> findAll(String title, int minYear,
                                               int page, int size, String sortBy, String direction) {
@@ -58,9 +56,7 @@ public class BookService {
         return PageResponse.from(result);
     }
 
-    /**
-     * Paginated, sorted list of the books in one category within a price range.
-     */
+    // Paged search by category and price
     @Transactional(readOnly = true)
     public PageResponse<BookResponse> searchByCategoryAndPrice(String category, BigDecimal minPrice, BigDecimal maxPrice,
                                                                int page, int size, String sortBy, String direction) {
@@ -125,9 +121,7 @@ public class BookService {
         fileStorageService.delete(coverPath);
     }
 
-    /**
-     * Stores the uploaded file on disk and records its path on the book.
-     */
+    // Saves the file and stores its path
     @Transactional
     public BookResponse uploadCover(Long id, MultipartFile file) {
         Book book = getBook(id);

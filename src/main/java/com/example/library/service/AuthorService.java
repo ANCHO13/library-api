@@ -70,7 +70,7 @@ public class AuthorService {
 
     @Transactional
     public void delete(Long id) {
-        // The author's books are removed as well (cascade on Author.books).
+        // Cascades to the author's books
         authorRepository.delete(getAuthor(id));
     }
 

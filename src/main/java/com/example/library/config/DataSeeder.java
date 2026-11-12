@@ -13,10 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import java.math.BigDecimal;
 import java.util.Set;
 
-/**
- * Inserts a little sample data the first time the application starts,
- * so the list endpoints have something to show.
- */
+// Inserts sample data on first start
 @Configuration
 public class DataSeeder {
 

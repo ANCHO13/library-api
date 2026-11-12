@@ -4,9 +4,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-/**
- * Stable JSON shape for paginated results.
- */
+// JSON shape for paginated results
 public record PageResponse<T>(
         List<T> content,
         int page,

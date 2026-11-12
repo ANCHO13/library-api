@@ -29,7 +29,7 @@ public class Author {
     @Column(nullable = false, unique = true, length = 120)
     private String email;
 
-    // One author has many books. Deleting an author deletes their books.
+    // Deleting an author deletes their books
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book> books = new ArrayList<>();
 

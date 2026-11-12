@@ -28,8 +28,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    // GET /api/categories            -> all categories
-    // GET /api/categories?minBooks=2 -> only categories with at least 2 books
+    // Optional minBooks filter
     @GetMapping
     public List<CategoryResponse> list(@RequestParam(required = false) Integer minBooks) {
         if (minBooks != null) {

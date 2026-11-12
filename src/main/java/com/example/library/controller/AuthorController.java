@@ -34,8 +34,7 @@ public class AuthorController {
         this.bookService = bookService;
     }
 
-    // GET /api/authors                               -> all authors
-    // GET /api/authors?firstName=jane&lastName=austen -> search by full name
+    // Optional search by full name
     @GetMapping
     public List<AuthorResponse> list(@RequestParam(required = false) String firstName,
                                      @RequestParam(required = false) String lastName) {
@@ -50,14 +49,14 @@ public class AuthorController {
         return authorService.findById(id);
     }
 
-    // GET /api/authors/1/books?maxPrice=10 -> this author's books up to a price
+    // Optional maxPrice filter
     @GetMapping("/{id}/books")
     public List<BookResponse> booksOfAuthor(@PathVariable Long id,
                                             @RequestParam(defaultValue = "1000000") BigDecimal maxPrice) {
         return bookService.findByAuthorAndMaxPrice(id, maxPrice);
     }
 
-    // GET /api/authors/stats/book-counts -> number of books per author
+    // Books per author
     @GetMapping("/stats/book-counts")
     public List<AuthorBookCount> bookCounts() {
         return authorService.bookCounts();

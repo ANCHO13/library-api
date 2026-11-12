@@ -13,7 +13,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     boolean existsByNameIgnoreCase(String name);
 
-    // Custom query: categories that contain at least :minBooks books.
+    // @Query: categories with at least N books
     @Query("select c from Category c where size(c.books) >= :minBooks order by c.name")
     List<Category> findCategoriesWithAtLeast(@Param("minBooks") int minBooks);
 }

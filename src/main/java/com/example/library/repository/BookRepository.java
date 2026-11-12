@@ -14,16 +14,16 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    // Method-name query #1: title search + minimum year, paginated and sorted.
+    // Method-name query: title + min year, paged
     Page<Book> findByTitleContainingIgnoreCaseAndPublicationYearGreaterThanEqual(
             String title, Integer publicationYear, Pageable pageable);
 
-    // Method-name query #2: books of one author up to a maximum price.
+    // Method-name query: author's books up to a price
     List<Book> findByAuthorIdAndPriceLessThanEqual(Long authorId, BigDecimal maxPrice);
 
     boolean existsByIsbn(String isbn);
 
-    // Custom query #1: books in a category within a price range, paginated.
+    // @Query: category + price range, paged
     @Query(value = """
             select distinct b from Book b
             join b.categories c
@@ -41,7 +41,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                                            @Param("maxPrice") BigDecimal maxPrice,
                                            Pageable pageable);
 
-    // Custom query #2: books that still have no uploaded cover.
+    // @Query: books without a cover
     @Query("select b from Book b join fetch b.author where b.coverImagePath is null order by b.title")
     List<Book> findBooksWithoutCover();
 }

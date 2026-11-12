@@ -32,7 +32,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    // GET /api/books?page=0&size=5&sortBy=price&direction=desc&title=farm&minYear=1900
+    // Paged and sorted, optional filters
     @GetMapping
     public PageResponse<BookResponse> list(@RequestParam(defaultValue = "") String title,
                                            @RequestParam(defaultValue = "0") int minYear,
@@ -43,7 +43,7 @@ public class BookController {
         return bookService.findAll(title, minYear, page, size, sortBy, direction);
     }
 
-    // GET /api/books/search?category=classic&minPrice=5&maxPrice=10&page=0&size=5
+    // Category + price range, paged
     @GetMapping("/search")
     public PageResponse<BookResponse> search(@RequestParam String category,
                                              @RequestParam(defaultValue = "0") BigDecimal minPrice,
@@ -55,7 +55,7 @@ public class BookController {
         return bookService.searchByCategoryAndPrice(category, minPrice, maxPrice, page, size, sortBy, direction);
     }
 
-    // GET /api/books/without-cover -> books that have no uploaded cover yet
+    // Books with no cover yet
     @GetMapping("/without-cover")
     public List<BookResponse> withoutCover() {
         return bookService.findWithoutCover();
@@ -82,7 +82,7 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
-    // POST /api/books/1/cover  (multipart/form-data, field name "file")
+    // multipart/form-data, field "file"
     @PostMapping(value = "/{id}/cover", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public BookResponse uploadCover(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
         return bookService.uploadCover(id, file);
