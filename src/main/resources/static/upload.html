@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload book cover</title>
+    <style>
+        body { font-family: sans-serif; max-width: 480px; margin: 40px auto; }
+        label { display: block; margin-top: 16px; }
+        button { margin-top: 20px; padding: 8px 16px; }
+    </style>
+</head>
+<body>
+<h1>Upload a book cover</h1>
+
+<!-- The form posts multipart/form-data to POST /api/books/{id}/cover -->
+<form id="uploadForm" method="post" enctype="multipart/form-data">
+    <label>Book id
+        <input type="number" id="bookId" min="1" value="1" required>
+    </label>
+    <label>Cover file (jpg, png, gif, webp or pdf, max 5MB)
+        <input type="file" name="file" required>
+    </label>
+    <button type="submit">Upload</button>
+</form>
+
+<script>
+    document.getElementById('uploadForm').addEventListener('submit', function () {
+        this.action = '/api/books/' + document.getElementById('bookId').value + '/cover';
+    });
+</script>
+</body>
+</html>
